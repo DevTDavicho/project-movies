@@ -21,6 +21,11 @@
     margin-top: 0;
 }
 
+.subtitle {
+    font-size: 20px;
+    color: #6c7a89;
+}
+
 .movieDetails {
     font-size: 1.5rem;
 }

@@ -6,31 +6,32 @@ import "../pages/MovieDetails.css"
 
 export function MovieDetails(){
     const {movieId} = useParams
-    const [movie, setMovie] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [generos, setGeneros] = useState([]);
     
     useEffect(()=>{
-        get("/movie/" + movieId).then((data)=>{
-            setMovie(data);
+        get("/movies/" + movieId).then((data)=>{
+            setMovies(data);
             setGeneros(data.genre_ids[0]);
         });
     }, [movieId]);
-    const imageUrl = getMovieImg(movie.poster_path, 500)
+
+    const imageUrl = getMovieImg(movies.poster_path, 500);
     
     return(<div className="detailsContainer">
-        <img src={imageUrl} alt={movie.title} className="col movieImage" />
+        <img src={imageUrl} alt={movies.title} className="col movieImage" />
         <div className="col detailsContainer">
             <p className="title">
                 <strong> Título: </strong>
-                {movie.original_title}
+                {movies.original_title}
             </p>
-            <p>
+            <p className="col subtitle">
                 <strong> Género: </strong>
                 {generos ? generos.name : 'Género desconocido'}
             </p>
-            <p>
+            <p className="col subtitle">
                 <strong> Descripción: </strong>
-                {movie.overview}
+                {movies.overview}
             </p>
         </div>
     </div>)
